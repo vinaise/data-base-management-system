@@ -1,0 +1,88 @@
+task1
+import sqlite3
+
+try:
+    conn = sqlite3.connect('scool.db')
+    cursor = conn.cursor()
+    print('Connected to database succesfully')
+except sqlite3.Error as e:
+    print(f'Failed to connect to the database: {e}')
+    
+    
+    
+
+
+
+
+task2 
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS students (
+    id INTEGER PRIMARY KEY,
+    name TEXT
+    age INTEGER 
+    grade REAL
+)
+''')
+conn.commit()
+print('Table 'students' created succesfully')
+
+
+
+
+
+
+
+
+task3 
+
+student_data = [
+    (1, 'Alice', 20, 3.8)
+    (2, 'Bob', 21, 3.5)
+    (3, 'Charlie', 22, 3.9)
+    ]
+
+cursor.executemany('''
+INSERT INTO students (id, name age, grade)
+VALUES (?, ?, ?, ?)
+''', student_data)
+conn.commit()
+print('Data inserted into 'students' table succesfully')
+
+
+
+
+
+
+
+
+task4 
+
+cursor.execute('SELECT * FROM students')
+rows = cursor.fetchall()
+
+print('Querying all records from the 'students' table:')
+for row in rows:
+    print(f'ID: {row[0]}, Name: {row[1]}, Age: {row[2]}, Grade: {row[3]}')
+    
+    
+    
+    
+    
+    
+    
+    
+    
+task5 
+
+cursor.execute('''
+UPDATE students
+SET grade = ?
+WHERE id = ?
+''', (3.7, 2))
+conn.commit()
+
+
+cursor.execute('SELECT * FROM students WHERE id = ?', (2,))
+updated_student = cursor.fetchone()
+print(f'Updated record: ID: {updated_student[0]}, Name: {updated_student[0]}, ')
